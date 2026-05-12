@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>AEL-Software Analytics and Services(SaaS)</title>
+
+<link rel="icon" type="abhitech-logo" href="abhitech-logo.png">
+
+<style>
+:root{
+  --page-max-width: 1180px;
+
+  --card-min: 220px;
+  --card-max-width: 320px;
+  --card-max-height: 250px;
+  --card-image-height: 100px;
+
+  --gap: 0.9rem;
+
+  --brand-blue: #02008a;
+  --brand-accent: #00e0ff;
+  --text-dark: #111;
+  --text-light: #fff;
+}
+
+*{
+  box-sizing: border-box;
+  word-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: auto;
+  font-size: 15px;
+}
+
+header{
+  background: var(--brand-blue);
+  padding: clamp(.45rem, 1.6vw, .9rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  z-index: 2;
+  width: 100%;
+}
+
+.logo-container{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.logo-container img{
+  height: 40px;
+  width: auto;
+  display: block;
+  animation: logoBounce 1s ease-out;
+}
+
+@keyframes logoBounce{
+  0%{
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  50%{
+    transform: scale(1.06);
+    opacity: 1;
+  }
+
+  100%{
+    transform: scale(1);
+  }
+}
+
+.typing-text{
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: #02008a;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--brand-accent);
+  animation: blinkCursor 0.8s infinite;
+  margin-left: 0.5rem;
+}
+
+@keyframes blinkCursor{
+  0%,
+  49%{
+    border-color: var(--brand-accent);
+  }
+
+  50%,
+  100%{
+    border-color: transparent;
+  }
+}
+
+main{
+  flex-grow: 1;
+  max-width: var(--page-max-width);
+  margin: clamp(.9rem, 2.5vw, 1.4rem) auto;
+  padding: 0 0.9rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+#services h2{
+  margin-bottom: 0.7rem;
+  color: var(--brand-blue);
+  border-bottom: 2px solid var(--brand-blue);
+  padding-bottom: 0.45rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.25rem;
+}
+
+.cards-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: var(--gap);
+  padding: 0.55rem 0;
+  width: 100%;
+  align-items: stretch;
+  margin: 0;
+}
+
+.card{
+  background: var(--brand-blue);
+  border: 2px solid var(--brand-blue);
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.10);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  min-width: 0;
+  max-width: var(--card-max-width);
+  max-height: var(--card-max-height);
+}
+
+.card:hover{
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 10px 20px rgba(2,0,138,0.18), 0 0 12px rgba(0,224,255,0.04);
+  z-index: 3;
+}
+
+.card img{
+  width: 100%;
+  height: var(--card-image-height);
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: block;
+}
+
+.img-rotator{
+  position: relative;
+  width: 100%;
+  height: var(--card-image-height);
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.img-rotator .rot-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: block;
+  transition: opacity 450ms ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.img-rotator .rot-img.visible{
+  opacity: 1;
+}
+
+.card-content{
+  padding: 0.68rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+  min-width: 0;
+}
+
+.card-title{
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.12;
+}
+
+.card-description{
+  font-size: 0.86rem;
+  color: white;
+  flex-grow: 1;
+  margin: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.14;
+}
+
+footer{
+  background: var(--brand-blue);
+  color: white;
+  text-align: center;
+  padding: 0.75rem 0;
+  font-weight: 600;
+  font-size: 0.88rem;
+  box-shadow: inset 0 1px 5px rgba(0,0,0,0.12);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.cursor-glow{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,224,255,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+@media (min-width: 1100px){
+  .cards-container{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(var(--gap) * 1.02);
+  }
+
+  :root{
+    --card-max-width: 330px;
+    --card-max-height: 270px;
+    --card-image-height: 110px;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 961px){
+  :root{
+    --page-max-width: 1080px;
+    --card-min: 200px;
+    --card-max-width: 300px;
+    --card-max-height: 240px;
+    --card-image-height: 92px;
+    --gap: 0.85rem;
+  }
+
+  header{
+    padding: .5rem .7rem;
+    font-size: 0.98rem;
+  }
+
+  main{
+    margin: 1rem auto;
+    padding: 0 .8rem;
+  }
+}
+
+@media (max-width: 992px){
+  header{
+    padding: 0.45rem 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .typing-text{
+    font-size: 0.9rem;
+    margin-left: 0.35rem;
+  }
+
+  main{
+    margin: 0.9rem auto;
+    padding: 0 0.7rem;
+  }
+
+  .cards-container{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--gap) * 0.95);
+  }
+
+  :root{
+    --card-max-width: 300px;
+    --card-max-height: 240px;
+    --card-image-height: 95px;
+  }
+}
+
+@media (max-width: 600px){
+  header{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem 0.45rem;
+  }
+
+  .logo-container{
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .logo-container img{
+    height: 36px;
+  }
+
+  .typing-text{
+    font-size: 0.86rem;
+    border-right: none;
+    margin: 0;
+  }
+
+  main{
+    margin: 0.6rem auto;
+    padding: 0 0.5rem;
+  }
+
+  #services h2{
+    font-size: 1.08rem;
+    text-align: center;
+    padding-bottom: 0.4rem;
+  }
+
+  .cards-container{
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+    padding: 0.35rem 0;
+  }
+
+  :root{
+    --card-max-width: 100%;
+    --card-max-height: 210px;
+    --card-image-height: 88px;
+    --card-min: 200px;
+  }
+
+  .card{
+    border-radius: 8px;
+  }
+
+  .card-content{
+    padding: 0.62rem;
+  }
+
+  .card-title{
+    font-size: 0.96rem;
+  }
+
+  .card-description{
+    font-size: 0.8rem;
+  }
+
+  footer{
+    font-size: 0.82rem;
+    padding: 0.55rem 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-glow"></div>
+
+<header>
+  <div class="logo-container">
+    <img src="abhitech-logo.png" alt="Abhitech Logo" />
+    <span>AEL-Software Analytics and Services(SaaS)</span>
+  </div>
+</header>
+
+<main>
+
+<section id="services">
+
+<h2>
+  Our Offerings -
+  <div class="typing-text" id="typing"></div>
+</h2>
+
+<div class="cards-container">
+
+<a class="card" href="https://abhi9.in/" target="_blank" rel="noopener">
+
+<div class="img-rotator" aria-hidden="false" aria-label="Abhitech Technical Workspace images">
+  <img
+    id="rot-img-a"
+    class="rot-img visible"
+    src="/erp.png"
+    alt="Abhitech Technical Workspace screenshot - 1"
+  />
+
+  <img
+    id="rot-img-b"
+    class="rot-img"
+    src="/erp1.png"
+    alt="Abhitech Technical Workspace screenshot - 2"
+  />
+</div>
+
+<div class="card-content">
+  <h3 class="card-title">AbhiNav</h3>
+
+  <p class="card-description">
+    A comprehensive tool to monitor our technical team as human resource
+    for effective deployment and manage various databases related to
+    customers, products etc.
+  </p>
+</div>
+
+</a>
+
+<a class="card" href="https://abhistat.com/" target="_blank" rel="noopener">
+
+<img src="/abhistat.jpeg" alt="AbhiStat" />
+
+<div class="card-content">
+  <h3 class="card-title">AbhiStat</h3>
+
+  <p class="card-description">
+    A statistical tool that compares datasets to quantify performance
+    impact and process improvements to find out relationships between
+    various parameters.
+  </p>
+</div>
+
+</a>
+
+<a class="card" href="http://91.203.132.197/slagging/" target="_blank" rel="noopener">
+
+<img src="/combustionanalyzer.jpeg" alt="Combustion Analyzer" />
+
+<div class="card-content">
+  <h3 class="card-title">Combustion Analyzer</h3>
+
+  <p class="card-description">
+    AI based simulation tool to predict slagging characteristics of
+    individual coal to optimize the coal blend cost.
+  </p>
+</div>
+
+</a>
+
+<a class="card" href="https://abhitech-abcd.netlify.app/" target="_blank" rel="noopener">
+
+<img src="/advancedblockestimator.png" alt="Block Estimator" />
+
+<div class="card-content">
+  <h3 class="card-title">
+    ABCD - Advanced Bunkering and Coal Database
+  </h3>
+
+  <p class="card-description">
+    Real time coal bunkering and monitoring system to estimate blockwise
+    combustion characteristics.
+  </p>
+</div>
+
+</a>
+
+<a class="card" href="http://91.203.132.197/merc/" target="_blank" rel="noopener">
+
+<img src="/abhipact.jpeg" alt="AbhiPact" />
+
+<div class="card-content">
+  <h3 class="card-title">AbhiPact</h3>
+
+  <p class="card-description">
+    Advanced analytics platform to analyze regulatory performance of
+    power plants.
+  </p>
+</div>
+
+</a>
+
+<a class="card" href="https://abhitechsmartcoke.com/" target="_blank" rel="noopener">
+
+<img src="/smartcoke.png" alt="SmartCoke" />
+
+<div class="card-content">
+  <h3 class="card-title">SmartCoke</h3>
+
+  <p class="card-description">
+    Revolutionary AI based tool to optimize coal blends based on
+    historical data to reduce cost towards optimization of coke making
+    process.
+  </p>
+</div>
+
+</a>
+
+</div>
+</section>
+</main>
+
+<footer>
+  ©
+  <script>
+    document.write(new Date().getFullYear());
+  </script>
+
+  Abhitech Energycon Limited. All rights reserved.
+</footer>
+
+<script>
+const cursor = document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove', e => {
+  cursor.style.top = e.clientY + 'px';
+  cursor.style.left = e.clientX + 'px';
+});
+
+(function(){
+
+  const el = document.getElementById('typing');
+
+  const words = [
+    "Innovative,",
+    "Energy,",
+    "Sustainable,",
+    "Customized"
+  ];
+
+  const letterDelay = 60;
+  const betweenWordsDelay = 220;
+  const afterAllDelay = 1000;
+
+  let wordIndex = 0;
+  let letterIndex = 0;
+  let completed = [];
+
+  function typeLetter(){
+
+    const current = words[wordIndex];
+
+    const prefix = completed.length
+      ? completed.join(' ') + ' '
+      : '';
+
+    const partial = current.slice(0, letterIndex + 1);
+
+    el.textContent = prefix + partial;
+
+    letterIndex++;
+
+    if(letterIndex < current.length){
+
+      setTimeout(typeLetter, letterDelay);
+
+    } else {
+
+      completed.push(current);
+
+      setTimeout(() => {
+
+        wordIndex++;
+        letterIndex = 0;
+
+        if(wordIndex < words.length){
+
+          setTimeout(typeLetter, betweenWordsDelay);
+
+        } else {
+
+          setTimeout(() => {
+
+            el.textContent = '';
+
+            completed = [];
+            wordIndex = 0;
+            letterIndex = 0;
+
+            setTimeout(typeLetter, 300);
+
+          }, afterAllDelay);
+        }
+
+      }, betweenWordsDelay);
+    }
+  }
+
+  setTimeout(typeLetter, 300);
+
+})();
+
+(function(){
+
+  const imgA = document.getElementById('rot-img-a');
+  const imgB = document.getElementById('rot-img-b');
+
+  if(!imgA || !imgB){
+    return;
+  }
+
+  const images = [
+    '/erp7.png',
+    '/erp8.png',
+    '/erp9.png',
+    '/erp7.png',
+    '/erp6.png'
+  ];
+
+  images.forEach(src => {
+    const preloadImage = new Image();
+    preloadImage.src = src;
+  });
+
+  let currentIndex = 0;
+  let showingA = true;
+
+  const changeInterval = 2000;
+
+  imgA.src = images[0];
+  imgB.src = images[1] || images[0];
+
+  function showElement(element){
+    element.classList.add('visible');
+  }
+
+  function hideElement(element){
+    element.classList.remove('visible');
+  }
+
+  setInterval(() => {
+
+    const nextIndex = (currentIndex + 1) % images.length;
+
+    if(showingA){
+
+      imgB.src = images[nextIndex];
+
+      requestAnimationFrame(() => {
+        showElement(imgB);
+        hideElement(imgA);
+      });
+
+    } else {
+
+      imgA.src = images[nextIndex];
+
+      requestAnimationFrame(() => {
+        showElement(imgA);
+        hideElement(imgB);
+      });
+    }
+
+    showingA = !showingA;
+    currentIndex = nextIndex;
+
+  }, changeInterval);
+
+})();
+</script>
+
+</body>
+</html>
