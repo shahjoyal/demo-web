@@ -169,6 +169,23 @@ main{
   max-height: var(--card-max-height);
 }
 
+.card-alt {
+  background: #daa520;
+  border: 2px solid #daa520;
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.10);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  min-width: 0;
+  max-width: var(--card-max-width);
+  max-height: var(--card-max-height);
+}
+
 .card:hover{
   transform: translateY(-5px) scale(1.01);
   box-shadow: 0 10px 20px rgba(2,0,138,0.18), 0 0 12px rgba(0,224,255,0.04);
@@ -454,7 +471,7 @@ footer{
 
 </a>
 
-<a class="card" href="https://abhistat.com/" target="_blank" rel="noopener">
+<a class="card card-alt" href="https://abhistat.com/" target="_blank" rel="noopener">
 
 <img src="/abhistat.jpeg" alt="AbhiStat" />
 
@@ -485,7 +502,7 @@ footer{
 
 </a>
 
-<a class="card" href="https://abhitech-abcd.netlify.app/" target="_blank" rel="noopener">
+<a class="card card-alt" href="https://abhitech-abcd.netlify.app/" target="_blank" rel="noopener">
 
 <img src="/advancedblockestimator.png" alt="Block Estimator" />
 
@@ -517,7 +534,7 @@ footer{
 
 </a>
 
-<a class="card" href="https://abhitechsmartcoke.com/" target="_blank" rel="noopener">
+<a class="card card-alt" href="https://abhitechsmartcoke.com/" target="_blank" rel="noopener">
 
 <img src="/smartcoke.png" alt="SmartCoke" />
 
